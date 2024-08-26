@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import spring.boot.capston2.API.ApiException;
 import spring.boot.capston2.Model.Farmers;
 import spring.boot.capston2.Model.Nurseries;
+import spring.boot.capston2.Model.Orders;
 import spring.boot.capston2.Model.Plants;
 import spring.boot.capston2.Repository.FarmersRepository;
 import spring.boot.capston2.Repository.NurseriesRepository;
+import spring.boot.capston2.Repository.OrdersRepository;
 import spring.boot.capston2.Repository.PlantsRepository;
 
 import java.util.List;
@@ -18,6 +20,7 @@ public class PlantsService {
     private final PlantsRepository plantsRepository;
     private final FarmersRepository farmersRepository;
     private final NurseriesRepository nurseriesRepository;
+    private final OrdersRepository ordersRepository;
 
     public List<Plants> getAllPlants() {
         return plantsRepository.findAll();
@@ -80,6 +83,22 @@ public class PlantsService {
         }
         plants.setNurseries(nurseries);
 
+        plantsRepository.save(plants);
+    }
+
+    public void assignOrderToPlant(Integer id, Integer orderId) {
+        Plants plants = plantsRepository.findPlantsById(id);
+        Orders orders = ordersRepository.findOrdersById(orderId);
+        if (plants == null) {
+            throw new ApiException("plants not found");
+        }
+        if (orders == null) {
+            throw new ApiException("orders not found");
+        }
+        plants.getOrders().add(orders);
+        orders.getPlants().add(plants);
+
+        ordersRepository.save(orders);
         plantsRepository.save(plants);
     }
 }

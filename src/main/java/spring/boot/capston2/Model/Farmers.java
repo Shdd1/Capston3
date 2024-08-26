@@ -28,7 +28,7 @@ public class Farmers {
     @Column(columnDefinition = "varchar(30) not null")
     private String phone_number;
 
-    @Column(columnDefinition = "date not null")
+    @Column(columnDefinition = "datetime default (current_timestamp)")
     private LocalDate registration_date;
 
     @OneToMany(mappedBy = "farmers" ,cascade = CascadeType.ALL)

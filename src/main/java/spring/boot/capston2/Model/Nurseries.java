@@ -40,7 +40,7 @@ public class Nurseries {
     @Column(columnDefinition = "varchar(30) not null")
     private String typeOfPlants;
 
-    @Column(columnDefinition = "date not null")
+    @Column(columnDefinition = "datetime default (current_timestamp)")
     private LocalDate registration_date;
 
     @OneToMany(mappedBy = "nurseries", cascade = CascadeType.ALL)

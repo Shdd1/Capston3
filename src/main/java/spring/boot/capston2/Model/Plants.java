@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -74,4 +76,7 @@ public class Plants {
     @JsonIgnore
     @JoinColumn(name = "nurseries_id" , referencedColumnName = "id")
     private Nurseries nurseries;
+
+    @ManyToMany(mappedBy = "plants")
+    private Set<Orders> orders;
 }

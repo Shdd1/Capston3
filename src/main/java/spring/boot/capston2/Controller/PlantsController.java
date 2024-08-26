@@ -45,6 +45,12 @@ public class PlantsController {
     @PutMapping("/assignNurseriesToPlants/{id}")
     public ResponseEntity assignNurseriesToPlants(@PathVariable Integer id, @RequestParam Integer nurseriesId) {
         plantsService.assignNurseries(id, nurseriesId);
-        return ResponseEntity.status(200).body("assign Nurseries To Plants");
+        return ResponseEntity.status(200).body("assign Nurseries To Plants successfully");
+    }
+
+    @PutMapping("/assignOrderToPlants/{id}")
+    public ResponseEntity assignOrderToPlants(@PathVariable Integer id, @RequestParam Integer ordersId) {
+        plantsService.assignOrderToPlant(id, ordersId);
+        return ResponseEntity.status(200).body("assign Orders To Plants successfully");
     }
 }

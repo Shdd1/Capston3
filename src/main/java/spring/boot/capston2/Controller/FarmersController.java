@@ -15,7 +15,7 @@ public class FarmersController {
 
     @GetMapping("/get")
     public ResponseEntity getAllFarmers() {
-        return ResponseEntity.ok(farmersService.getAllFarmers());
+        return ResponseEntity.status(200).body(farmersService.getAllFarmers());
     }
     @PostMapping("/add")
     public ResponseEntity addFarmers(@Valid @RequestBody Farmers farmers) {
@@ -25,11 +25,11 @@ public class FarmersController {
     @PutMapping("/update/{id}")
     public ResponseEntity updateFarmers(@Valid @RequestBody Farmers farmers,@PathVariable Integer id){
         farmersService.updateFarmer(farmers,id);
-        return ResponseEntity.status(200).body("Update ... ");
+        return ResponseEntity.status(200).body("Updated Farmers successful ");
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteFarmers(@PathVariable Integer id){
         farmersService.deleteFarmer(id);
-        return ResponseEntity.status(200).body("delete ...");
+        return ResponseEntity.status(200).body("Deleted Farmers successful ");
     }
 }
